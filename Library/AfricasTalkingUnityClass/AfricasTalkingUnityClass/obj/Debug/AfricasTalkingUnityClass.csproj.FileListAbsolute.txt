@@ -1,0 +1,11 @@
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\AfricasTalkingUnityClass.dll.config
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\AfricasTalkingUnityClass.dll
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\AfricasTalkingUnityClass.pdb
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\AfricasTalkingCS.dll
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\obj\Debug\AfricasTalkingUnityClass.dll
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\obj\Debug\AfricasTalkingUnityClass.pdb
+C:\Users\Fumbi\Documents\ATUnity\AfricasTalkingFirebaseUnityLibrary\Library\AfricasTalkingUnityClass\AfricasTalkingUnityClass\obj\Debug\AfricasTalkingUnityClass.csprojResolveAssemblyReference.cache
