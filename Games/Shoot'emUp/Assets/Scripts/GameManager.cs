@@ -1,20 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
-using AfricasTalkingUnityClass;
 
 public class GameManager : MonoBehaviour {
-
+	PlayerController playerController;
+	ZombieManager zombieManager;
+	UIManager uiManager;
+	bool isPaused;
 	// Use this for initialization
 	void Start () {
-		var at_u = new AfricasTalkingUnityGateway();
-		//Debug.Log(at_u.addLeaderboard("randomGameId","gamre-id",12,1,0.95f));
-		//at_u.SMS("sandbox","39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b","Suppp!!!!","Wassup");
-		//string x = at_u.signUp("funmbioyesanya7@gmail.com","Kenya","Baxter Dynasty","1234","+254701951089");
+		isPaused = false;
+		uiManager = GetComponent<UIManager>();
+		zombieManager = GetComponent<ZombieManager>();
+		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(playerController.Health<=0f)
+		{
+			GameOver();
+		}
+	}
+
+	public void Pause()
+	{
+		if(isPaused)
+		isPaused = false;
+		else
+		isPaused = true;
+
+		if(isPaused)
+		{
+			playerController.enabled = false;
+			zombieManager.pauseZombies();
+			zombieManager.isPaused = true;
+			uiManager.pause();
+			//Enable options panel
+		}
+		else
+		{
+			playerController.enabled = true;
+			zombieManager.playZombies();
+			zombieManager.isPaused = false;
+			Time.timeScale = 1f;
+			uiManager.unPause();
+			//Disable options panel
+		}
+	}
+
+	void GameOver()
+	{
+		Debug.Log("GameOver");
+		//Check if value is higher than player's highscore
+		//Load GameOver Scene
 	}
 }

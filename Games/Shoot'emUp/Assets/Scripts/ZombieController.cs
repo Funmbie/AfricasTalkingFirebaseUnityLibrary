@@ -5,6 +5,7 @@ using UnityEngine;
 public class ZombieController : MonoBehaviour {
 	[HideInInspector] public int Health;
 	GameObject target;
+	
 	// Use this for initialization
 	void Start () {
 		Health = 150;
@@ -15,9 +16,17 @@ public class ZombieController : MonoBehaviour {
 	void Update () {
 		if(Health<=0)
 		Death();
-
-		transform.Translate(0f,0f,0.05f);
+		int Difficulty = PlayerPrefs.GetInt("Difficulty",0);
+		transform.Translate(0f,0f,0.1f+Difficulty*Time.deltaTime);
 		transform.LookAt(target.transform);
+	}
+
+	void OnTriggerStay(Collider col)
+	{
+		if(col.CompareTag("Player"))
+		{
+			col.gameObject.GetComponent<PlayerController>().Health -= 0.5f;
+		}
 	}
 
 	void Death()

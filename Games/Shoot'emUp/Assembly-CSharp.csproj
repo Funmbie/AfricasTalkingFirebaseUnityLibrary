@@ -53,13 +53,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\bulletController.cs" />
+     <Compile Include="Assets\HealthToUIManager.cs" />
+     <Compile Include="Assets\scoreManager.cs" />
+     <Compile Include="Assets\Scripts\bulletController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\ZombieController.cs" />
-     <Compile Include="Assets\ZombieManager.cs" />
+     <Compile Include="Assets\Scripts\ZombieManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -261,6 +263,18 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="AfricasTalkingCS">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingCS.dll</HintPath>
+ </Reference>
+ <Reference Include="AfricasTalkingUnityClass">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingUnityClass.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Net.Http.Formatting">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/System.Net.Http.Formatting.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
  </Reference>
@@ -269,18 +283,6 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="AfricasTalkingCS">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingCS.dll</HintPath>
- </Reference>
- <Reference Include="System.Net.Http.Formatting">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/System.Net.Http.Formatting.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Newtonsoft.Json.dll</HintPath>
- </Reference>
- <Reference Include="AfricasTalkingUnityClass">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingUnityClass.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

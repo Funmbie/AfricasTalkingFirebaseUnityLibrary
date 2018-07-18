@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour {
 
 	public Transform spawnPoint;
 	public GameObject bulletSpawn;
+	public float Health,Score;
 
 	[HideInInspector]public float fireTime;
 
 	// Use this for initialization
 	void Start () {
+		Score = 0f;
+		Health = 100f;
 		fireTime = PlayerPrefs.GetFloat("FireTime",1.4f);
 	}
 	
@@ -53,7 +56,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		GameObject bullet = Instantiate(bulletSpawn,spawnPoint.position, Quaternion.identity) as GameObject;
 		Rigidbody b_rb = bullet.GetComponent<Rigidbody>();
-		b_rb.AddForce(transform.forward*1000f);
+		b_rb.AddForce(transform.forward*2000f);
 
 		yield return new WaitForSeconds(fireTime);
 	}
