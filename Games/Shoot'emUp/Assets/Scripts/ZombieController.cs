@@ -17,7 +17,7 @@ public class ZombieController : MonoBehaviour {
 		if(Health<=0)
 		Death();
 		int Difficulty = PlayerPrefs.GetInt("Difficulty",0);
-		transform.Translate(0f,0f,0.1f+Difficulty*Time.deltaTime);
+		transform.Translate(0f,0f,0.25f+Difficulty*Time.deltaTime);
 		transform.LookAt(target.transform);
 	}
 

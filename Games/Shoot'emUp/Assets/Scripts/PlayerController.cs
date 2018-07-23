@@ -9,15 +9,16 @@ public class PlayerController : MonoBehaviour {
 
 	public Transform spawnPoint;
 	public GameObject bulletSpawn;
-	public float Health,Score;
+	public float Health;
+	public int Score;
 
 	[HideInInspector]public float fireTime;
 
 	// Use this for initialization
 	void Start () {
-		Score = 0f;
+		Score = 0;
 		Health = 100f;
-		fireTime = PlayerPrefs.GetFloat("FireTime",1.4f);
+		fireTime = PlayerPrefs.GetFloat("FireTime",2.4f);
 	}
 	
 	// Update is called once per frame
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Move(float x, float z)
 	{
-		transform.Translate(0f,0f,z*21f*Time.deltaTime);
+		transform.Translate(0f,0f,z*14f*Time.deltaTime);
 		transform.Rotate(0f,x*120f*Time.deltaTime,0f);
 	}
 
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		GameObject bullet = Instantiate(bulletSpawn,spawnPoint.position, Quaternion.identity) as GameObject;
 		Rigidbody b_rb = bullet.GetComponent<Rigidbody>();
-		b_rb.AddForce(transform.forward*2000f);
+		b_rb.AddForce(transform.forward*4000f);
 
 		yield return new WaitForSeconds(fireTime);
 	}

@@ -14,6 +14,13 @@ namespace AfricasTalkingUnityClass
 {
     public class AfricasTalkingUnityGateway
     {
+        //Classes
+        class Game
+        {
+            public string name;
+            public string publisher;
+            public string year;
+        }
         class User
         {
             public string date;
@@ -59,6 +66,57 @@ namespace AfricasTalkingUnityClass
             public int minor;
             public float others;
         }
+
+        //Game Functions
+        public string registerGame(string name, string publisher, string year)
+        {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            //Insert game. If successful
+            //Retrieve all games and get their ids
+            //Compare game id from json to game id from params
+            Game newGame = new Game();
+            newGame.name = name;
+            newGame.publisher = publisher;
+            newGame.year = year;
+            string json = JsonConvert.SerializeObject(newGame);
+
+            try
+            {
+                var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/games/.json");
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                var buffer = Encoding.UTF8.GetBytes(json);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                var response = request.GetResponse();
+                json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                return "";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public string deleteGame(string game_id)
+        {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+
+            try
+            {
+                var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/games/" + game_id + "/.json");
+                request.Method = "DELETE";
+                request.ContentType = "application/json";
+                var response = request.GetResponse();
+                return "OK";
+            }
+
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+        //User's Function
 
         public string signUp(string email, string location, string name,string password, string phone)
         {
@@ -168,6 +226,11 @@ namespace AfricasTalkingUnityClass
             }
         }
 
+        public string retrieveUsername(string gamer_id)
+        {
+            return retrieveUserInfo(gamer_id,"name");
+        }
+
         public string login(string credentials, string password)
         {
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
@@ -242,6 +305,8 @@ namespace AfricasTalkingUnityClass
                 return e.Message;
             }
         }
+
+        //Leaderboard Functions
 
         public string setLeaderboard(string game_id, string gamer_id, int main, int minor, float others)
         {
@@ -451,6 +516,7 @@ namespace AfricasTalkingUnityClass
         }
 
         //Africa's Talking API Functions
+
         public string SMS(string username, string apikey, string msg, string gamer_id)
         {
             try

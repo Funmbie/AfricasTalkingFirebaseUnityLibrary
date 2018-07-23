@@ -53,15 +53,104 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\HealthToUIManager.cs" />
-     <Compile Include="Assets\scoreManager.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\BloomComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\BuiltinDebugViewsComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\ChromaticAberrationComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\ColorGradingComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\DitheringComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\FogComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\FxaaComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\GrainComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\TaaComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\UserLutComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Components\VignetteComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\AmbientOcclusionModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\BloomModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\DitheringModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\FogModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\GrainModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\MotionBlurModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\UserLutModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Models\VignetteModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\PostProcessingBehaviour.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\PostProcessingComponent.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\PostProcessingContext.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\PostProcessingModel.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\PostProcessingProfile.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
+     <Compile Include="Assets\ImportedPackages\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
      <Compile Include="Assets\Scripts\bulletController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\HealthToUIManager.cs" />
+     <Compile Include="Assets\Scripts\Leaderboard.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Restarter.cs" />
+     <Compile Include="Assets\Scripts\scoreManager.cs" />
+     <Compile Include="Assets\Scripts\TimerScript.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\ZombieController.cs" />
      <Compile Include="Assets\Scripts\ZombieManager.cs" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\DepthOfField.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Fog.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\LutGen.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\ACES.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Tonemapping.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Uber.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Blit.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\WaveformRender.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\FXAA3.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\MotionBlur.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Bluenoise64\LICENSE.txt" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\BuiltinDebugViews.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Common.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\UI\Trackball.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Bloom.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\TAA.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\TAA.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\EyeAdaptation.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\GrainGen.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\FXAA.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Bloom.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
+     <None Include="Assets\ImportedPackages\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -263,17 +352,8 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
- <Reference Include="AfricasTalkingCS">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingCS.dll</HintPath>
- </Reference>
  <Reference Include="AfricasTalkingUnityClass">
  <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingUnityClass.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Newtonsoft.Json.dll</HintPath>
- </Reference>
- <Reference Include="System.Net.Http.Formatting">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/System.Net.Http.Formatting.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
@@ -283,6 +363,15 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="AfricasTalkingCS">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/AfricasTalkingCS.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Net.Http.Formatting">
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/System.Net.Http.Formatting.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

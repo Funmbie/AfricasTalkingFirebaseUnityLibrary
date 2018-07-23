@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class ZombieManager : MonoBehaviour {
-	float delay;
+	
+	[HideInInspector]public int enemiesSpawned;
 	public GameObject zombiePrefab;
 	public Transform[] spawnPoints;
-	GameObject[] zombies;
+	public Text spawnCounter;
 	public bool isPaused;
+
+	GameObject[] zombies;
+	float delay;
+
 	// Use this for initialization
 	void Start () {
-		int x = PlayerPrefs.GetInt("Difficulty",0);
+		int x = PlayerPrefs.GetInt("Difficulty",2);
 		if(x==0)
 		delay = 4f;
 		else if(x==1)
@@ -24,6 +28,9 @@ public class ZombieManager : MonoBehaviour {
 	{
 		//Collect all Zombies
 		zombies = GameObject.FindGameObjectsWithTag("Zombie");
+
+		enemiesSpawned = zombies.Length;
+		spawnCounter.text = "Enemies Spawned: "+enemiesSpawned.ToString()+"/25";
 	}
 
 	void SpawnZombie()

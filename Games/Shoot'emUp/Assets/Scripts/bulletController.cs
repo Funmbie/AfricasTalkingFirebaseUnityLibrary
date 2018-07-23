@@ -7,7 +7,7 @@ public class bulletController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Damage = PlayerPrefs.GetInt("Damage",50);
-		Invoke("Die",4f);
+		Invoke("Die",2.1f);
 	}
 	
 	// Update is called once per frame
