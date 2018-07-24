@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 public class Leaderboard : MonoBehaviour {
 	public Image entryPanel;
-	int limit = 1;
+	int limit = 3;
 	int addCount;
 	LeaderboardResponse[] response;
 
@@ -27,7 +27,9 @@ public class Leaderboard : MonoBehaviour {
 		}
 
 		var at_u = new AfricasTalkingUnityGateway();
-		string json = at_u.getLeaderboard("-LI67SV_Xj_DldmfUiaZ",limit);
+		string x = at_u.login("funmbioyesanya7@gmail.com","1234");
+		string token = x.Substring(2,x.Length-2);
+		string json = at_u.getLeaderboard(token,"-LI67SV_Xj_DldmfUiaZ",limit);
 		response = JsonConvert.DeserializeObject<LeaderboardResponse[]>(json);
 
 		GenerateLeaderboard();
@@ -37,7 +39,7 @@ public class Leaderboard : MonoBehaviour {
 	{
 		addCount = 55;
 
-		for(int i=0;i<limit;i++)
+		for(int i=limit-1;i>=0;i--)
 		{
 			//generate GO
 			Vector3 pos = new Vector3(entryPanel.transform.position.x,entryPanel.transform.position.y-addCount,entryPanel.transform.position.z);

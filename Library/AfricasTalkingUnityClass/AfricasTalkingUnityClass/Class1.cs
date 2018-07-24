@@ -66,6 +66,23 @@ namespace AfricasTalkingUnityClass
             public int minor;
             public float others;
         }
+        class TokenRequest
+        {
+            public string email;
+            public string password;
+            public bool returnSecureToken;
+        }
+        class TokenResponse
+        {
+            public string kind;
+            public string localId;
+            public string email;
+            public string displayName;
+            public string idToken;
+            public bool registered;
+            public string refreshToken;
+            public string expiresIn;
+        }
 
         //Game Functions
         public string registerGame(string name, string publisher, string year)
@@ -169,6 +186,9 @@ namespace AfricasTalkingUnityClass
                     request.GetRequestStream().Write(buffer, 0, buffer.Length);
                     var response = request.GetResponse();
                     json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+
+                    //Add user to firebase client
+
 
                     return "OK";
                 }
@@ -310,7 +330,36 @@ namespace AfricasTalkingUnityClass
 
         public string setLeaderboard(string game_id, string gamer_id, int main, int minor, float others)
         {
+            string idToken = "";
+
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            string reqemail = retrieveUserInfo(gamer_id, "email");
+            string reqpass = retrieveUserInfo(gamer_id, "password");
+
+            TokenRequest tokenRequest = new TokenRequest();
+            tokenRequest.email = reqemail;
+            tokenRequest.password = reqpass;
+            tokenRequest.returnSecureToken = true;
+            string jsn = JsonConvert.SerializeObject(tokenRequest);
+            try
+            {
+                string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                var request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + apikey);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                var buffer = Encoding.UTF8.GetBytes(jsn);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                var response = request.GetResponse();
+                jsn = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                TokenResponse tokenResponse = new TokenResponse();
+                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(jsn);
+                idToken = tokenResponse.idToken;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
 
             //Read leaderboard
             string result = getJson("https://atgames-infra-test.firebaseio.com/leaderboard/.json");
@@ -403,11 +452,38 @@ namespace AfricasTalkingUnityClass
 
         public string addLeaderboard(string game_id,string gamer_id,int main,int minor,float others)
         {
+            string idToken = "";
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            string reqemail = retrieveUserInfo(gamer_id, "email");
+            string reqpass = retrieveUserInfo(gamer_id, "password");
 
+            TokenRequest tokenRequest = new TokenRequest();
+            tokenRequest.email = reqemail;
+            tokenRequest.password = reqpass;
+            tokenRequest.returnSecureToken = true;
+            string json = JsonConvert.SerializeObject(tokenRequest);
+            try
+            {
+                string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                var request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + apikey);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                var buffer = Encoding.UTF8.GetBytes(json);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                var response = request.GetResponse();
+                json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                TokenResponse tokenResponse = new TokenResponse();
+                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(json);
+                idToken = tokenResponse.idToken;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
             Leaderboard addleaderboard = new Leaderboard(DateTime.Now.ToString(),game_id,gamer_id,main,minor,others);
 
-            string json = JsonConvert.SerializeObject(addleaderboard);
+            json = JsonConvert.SerializeObject(addleaderboard);
             try
             {
                 var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/.json");
@@ -427,11 +503,41 @@ namespace AfricasTalkingUnityClass
             }
         }
 
-        public string getLeaderboard(string game_id,int limit)
+        public string getLeaderboard(string gamer_id,string game_id,int limit)
         {
-            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            string idToken="";
 
-            string result = getJson("https://atgames-infra-test.firebaseio.com/leaderboard/.json");
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            //Retrieve ID token
+            string reqemail = retrieveUserInfo(gamer_id,"email");
+            string reqpass = retrieveUserInfo(gamer_id,"password");
+
+            TokenRequest tokenRequest = new TokenRequest();
+            tokenRequest.email = reqemail;
+            tokenRequest.password = reqpass;
+            tokenRequest.returnSecureToken = true;
+            string json = JsonConvert.SerializeObject(tokenRequest);
+            try
+            {
+                string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                var request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key="+apikey);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                var buffer = Encoding.UTF8.GetBytes(json);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                var response = request.GetResponse();
+                json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                TokenResponse tokenResponse = new TokenResponse();
+                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(json);
+                idToken = tokenResponse.idToken;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+            string result = getJson("https://atgames-infra-test.firebaseio.com/leaderboard/.json?auth="+idToken);
             string[] words = splitFunction(result, '{');
             result = joinFunction(words);
             words = splitFunction(result, '}');
@@ -522,7 +628,8 @@ namespace AfricasTalkingUnityClass
             try
             {
                 var gateway = new AfricasTalkingGateway(username, apikey);
-                var sms = gateway.SendMessage("+254701951089", msg);
+                string phone = retrieveUserInfo(gamer_id,"phone");
+                var sms = gateway.SendMessage(phone, msg);
                 foreach (var res in sms["SMSMessageData"]["Recipients"])
                 {
                     if (res["status"] == "Success")

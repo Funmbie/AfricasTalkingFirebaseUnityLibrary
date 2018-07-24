@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DifficultySlider.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -98,6 +99,9 @@
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+     <Compile Include="Assets\MainMenuController.cs" />
+     <Compile Include="Assets\MusicScript.cs" />
+     <Compile Include="Assets\MusicToggle.cs" />
      <Compile Include="Assets\Scripts\bulletController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -355,15 +359,6 @@
  <Reference Include="AfricasTalkingUnityClass">
  <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingUnityClass.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.StandardEvents">
- <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
  <Reference Include="AfricasTalkingCS">
  <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/AfricasTalkingCS.dll</HintPath>
  </Reference>
@@ -372,6 +367,15 @@
  </Reference>
  <Reference Include="System.Net.Http.Formatting">
  <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/System.Net.Http.Formatting.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.StandardEvents">
+ <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

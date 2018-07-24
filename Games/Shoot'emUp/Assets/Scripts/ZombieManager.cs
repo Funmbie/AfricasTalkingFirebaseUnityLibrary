@@ -16,11 +16,11 @@ public class ZombieManager : MonoBehaviour {
 	void Start () {
 		int x = PlayerPrefs.GetInt("Difficulty",2);
 		if(x==0)
-		delay = 4f;
+		delay = 3f;
 		else if(x==1)
-		delay = 2f;
+		delay = 1.5f;
 		else if(x==2)
-		delay = 1f;
+		delay = 0.75f;
 		SpawnZombie();
 	}
 
