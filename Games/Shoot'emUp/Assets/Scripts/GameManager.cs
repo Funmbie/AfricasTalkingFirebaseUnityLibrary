@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if(playerController.Health<=0f || restarter.isPassed || zombieManager.enemiesSpawned >=25)
 		{
-			GameOver();
+			GameOverDisplay();
 		}
 	}
 
@@ -54,26 +54,22 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	void GameOverDisplay()
+	{
+		uiManager.GameOver();
+
+		Invoke("GameOver",1.4f);
+	}
+
 	void GameOver()
 	{
-		var at_u = new AfricasTalkingUnityGateway();
-		bool sent = false;
-		//Just add leaderboard,using score as main, enemies spawned as minor and time as others
-		//Collect all of them
-		string x = at_u.login("funmbioyesanya7@gmail.com","1234");
-		string token = x.Substring(2,x.Length-2);
-
 		int main = playerController.Score;
 		int minor = zombieManager.enemiesSpawned;
-		string y = timer.minutes+"."+timer.seconds;
-		float time = float.Parse(y);
-
-		if(!sent){
-		if(at_u.addLeaderboard("-LI67SV_Xj_DldmfUiaZ",token,main,minor,time)=="OK"){
+		float others = float.Parse(timer.minutes+"."+timer.seconds);
+		PlayerPrefs.SetInt("main",main);
+		PlayerPrefs.SetInt("minor",minor);
+		PlayerPrefs.SetFloat("others",others);
 		//Load GameOver Scene
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-		sent = true;
-		}
-		}
 	} 
 }

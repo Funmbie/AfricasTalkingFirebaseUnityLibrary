@@ -21,6 +21,10 @@ namespace AfricasTalkingUnityClass
             public string publisher;
             public string year;
         }
+        class GameId
+        {
+            public string name;
+        }
         class User
         {
             public string date;
@@ -96,7 +100,6 @@ namespace AfricasTalkingUnityClass
             newGame.publisher = publisher;
             newGame.year = year;
             string json = JsonConvert.SerializeObject(newGame);
-
             try
             {
                 var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/games/.json");
@@ -107,7 +110,9 @@ namespace AfricasTalkingUnityClass
                 request.GetRequestStream().Write(buffer, 0, buffer.Length);
                 var response = request.GetResponse();
                 json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
-                return "";
+                GameId gameId = new GameId();
+                gameId = JsonConvert.DeserializeObject<GameId>(json);
+                return gameId.name;
             }
             catch (Exception e)
             {
@@ -188,7 +193,29 @@ namespace AfricasTalkingUnityClass
                     json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
 
                     //Add user to firebase client
-
+                    try
+                    {
+                        TokenRequest signUp = new TokenRequest();
+                        signUp.email = email;
+                        signUp.password = password;
+                        signUp.returnSecureToken = true;
+                        json = JsonConvert.SerializeObject(signUp);
+                        string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                        request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=" + apikey);
+                        request.Method = "POST";
+                        request.ContentType = "application/json";
+                        buffer = Encoding.UTF8.GetBytes(json);
+                        request.ContentLength = buffer.Length;
+                        request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                        response = request.GetResponse();
+                        json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                        TokenResponse tokenResponse = new TokenResponse();
+                        tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(json);
+                    }
+                    catch (Exception e)
+                    {
+                        return e.Message;
+                    }
 
                     return "OK";
                 }
@@ -304,7 +331,7 @@ namespace AfricasTalkingUnityClass
                 }
             }
 
-            return "Done";
+            return "Empty Values";
         }
 
         public string Delete(string gamer_id)
@@ -362,7 +389,7 @@ namespace AfricasTalkingUnityClass
             }
 
             //Read leaderboard
-            string result = getJson("https://atgames-infra-test.firebaseio.com/leaderboard/.json");
+            string result = getJson("https://atgames-infra-test.firebaseio.com/leaderboard/.json?auth="+idToken);
             string[] words = splitFunction(result,'{');
             result = joinFunction(words);
             words = splitFunction(result, '}');
@@ -401,6 +428,7 @@ namespace AfricasTalkingUnityClass
                     }
                 }
             }
+
             //if game id exists in the json, patch the data
             if (exists)
             {
@@ -409,7 +437,7 @@ namespace AfricasTalkingUnityClass
 
                 try
                 {
-                    var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/"+key+"/.json");
+                    var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/"+key+ "/.json?auth=" + idToken);
                     request.Method = "PATCH";
                     request.ContentType = "application/json";
                     var buffer = Encoding.UTF8.GetBytes(json);
@@ -432,7 +460,7 @@ namespace AfricasTalkingUnityClass
                 string json = JsonConvert.SerializeObject(newEntry);
                 try
                 {
-                    var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/.json");
+                    var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/.json?auth=" + idToken);
                     request.Method = "POST";
                     request.ContentType = "application/json";
                     var buffer = Encoding.UTF8.GetBytes(json);
@@ -486,7 +514,7 @@ namespace AfricasTalkingUnityClass
             json = JsonConvert.SerializeObject(addleaderboard);
             try
             {
-                var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/.json");
+                var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/leaderboard/.json?auth="+idToken);
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 var buffer = Encoding.UTF8.GetBytes(json);
@@ -494,6 +522,7 @@ namespace AfricasTalkingUnityClass
                 request.GetRequestStream().Write(buffer, 0, buffer.Length);
                 var response = request.GetResponse();
                 json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                //Increment count on that gameid
 
                 return "OK";
             }
@@ -552,7 +581,7 @@ namespace AfricasTalkingUnityClass
             string[] others = new string[words.Length / 6];
             int counter = 0;
 
-            for (int i=0;i<words.Length;i+=6)
+            for (int i=words.Length-6;i>=0;i-=6)
             {
                 string trim = words[i].Substring(31,words[i].Length-32);
                 dates[counter] = trim;
@@ -576,7 +605,7 @@ namespace AfricasTalkingUnityClass
                 resultLeaderboard[i] = new Leaderboard("","","",0,0,0f);
             }
 
-            for (int i=0;i<gamer_ids.Length;i++) {
+            for (int i=0;i< gamer_ids.Length;i++) {
                 if (sizeCount < limit)
                 {
                     if (game_id == game_ids[i])
@@ -619,6 +648,48 @@ namespace AfricasTalkingUnityClass
             result = JsonConvert.SerializeObject(finalBoard);
 
             return result;
+        }
+
+        public int getGameCount(string gamer_id,string game_id)
+        {
+            string idToken = "";
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            string reqemail = retrieveUserInfo(gamer_id, "email");
+            string reqpass = retrieveUserInfo(gamer_id, "password");
+
+            TokenRequest tokenRequest = new TokenRequest();
+            tokenRequest.email = reqemail;
+            tokenRequest.password = reqpass;
+            tokenRequest.returnSecureToken = true;
+            string json = JsonConvert.SerializeObject(tokenRequest);
+            try
+            {
+                string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                var request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + apikey);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                var buffer = Encoding.UTF8.GetBytes(json);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                var response = request.GetResponse();
+                json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                TokenResponse tokenResponse = new TokenResponse();
+                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(json);
+                idToken = tokenResponse.idToken;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 0;
+            }
+            string result = getJson("https://atgames-infra-test.firebaseio.com/count/.json?auth=" + idToken);
+            string[] words = splitFunction(result, '{');
+            result = joinFunction(words);
+            words = splitFunction(result, '}');
+            result = joinFunction(words);
+            words = splitFunction(result, ',');
+
+            return 0;
         }
 
         //Africa's Talking API Functions

@@ -9,6 +9,12 @@ public class MusicScript : MonoBehaviour {
 	void Start () {
 		audi = GetComponent<AudioSource>();
 		DontDestroyOnLoad(this.gameObject);
+		if(PlayerPrefs.GetInt("Music",0)==0f)
+		audi.volume = 0f;
+		else
+		{
+			audi.volume = 1f;
+		}
 	}
 	
 	void PickTrack()

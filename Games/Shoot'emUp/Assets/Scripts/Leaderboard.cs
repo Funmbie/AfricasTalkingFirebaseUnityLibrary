@@ -2,10 +2,11 @@
 using UnityEngine;
 using AfricasTalkingUnityClass;
 using Newtonsoft.Json;
+using System;
 
 public class Leaderboard : MonoBehaviour {
 	public Image entryPanel;
-	int limit = 3;
+	int limit = 12;
 	int addCount;
 	LeaderboardResponse[] response;
 
@@ -20,31 +21,36 @@ public class Leaderboard : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		var at_u = new AfricasTalkingUnityGateway();
+		string token = PlayerPrefs.GetString("token","");
+
 		response = new LeaderboardResponse[limit];
 		for(int i=0;i<limit;i++)
 		{
 			response[i] = new LeaderboardResponse();
 		}
-
-		var at_u = new AfricasTalkingUnityGateway();
-		string x = at_u.login("funmbioyesanya7@gmail.com","1234");
-		string token = x.Substring(2,x.Length-2);
+		
+		try{
 		string json = at_u.getLeaderboard(token,"-LI67SV_Xj_DldmfUiaZ",limit);
 		response = JsonConvert.DeserializeObject<LeaderboardResponse[]>(json);
-
 		GenerateLeaderboard();
+		}
+		catch(Exception e)
+		{
+			Debug.Log(e.Message);
+		}
 	}
 	
 	void GenerateLeaderboard()
 	{
 		addCount = 55;
 
-		for(int i=limit-1;i>=0;i--)
+		for(int i=0;i<limit;i++)
 		{
 			//generate GO
 			Vector3 pos = new Vector3(entryPanel.transform.position.x,entryPanel.transform.position.y-addCount,entryPanel.transform.position.z);
 			Image newEntry = Instantiate(entryPanel,pos,Quaternion.identity);
-			newEntry.transform.SetParent(this.gameObject.transform);
+			newEntry.transform.SetParent(transform.GetChild(1).GetChild(0).GetChild(0).gameObject.transform);
 			newEntry.transform.localScale = entryPanel.transform.localScale;
 			//Set the Time
 			Text text1 = newEntry.transform.GetChild(0).GetComponent<Text>();

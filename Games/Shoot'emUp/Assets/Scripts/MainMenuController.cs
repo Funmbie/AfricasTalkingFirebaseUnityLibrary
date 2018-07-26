@@ -2,10 +2,11 @@
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour {
-	public GameObject mainmenu,leaderboard,options;
+	public GameObject mainmenu,leaderboard,options,loginPanel,regPanel;
 	// Use this for initialization
 	void Start () {
 		returntoMainMenu();
+		LoginPanel();
 	}
 
 	public void LoadGameScene()
@@ -33,5 +34,17 @@ public class MainMenuController : MonoBehaviour {
 		mainmenu.SetActive(false);
 		leaderboard.SetActive(false);
 		options.SetActive(true);
+	}
+
+	public void LoginPanel()
+	{
+		loginPanel.SetActive(true);
+		regPanel.SetActive(false);
+	}
+
+	public void RegPanel()
+	{
+		loginPanel.SetActive(false);
+		regPanel.SetActive(true);
 	}
 }

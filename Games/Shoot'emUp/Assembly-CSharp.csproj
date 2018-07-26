@@ -53,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DifficultySlider.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -99,17 +98,21 @@
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\ImportedPackages\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
-     <Compile Include="Assets\MainMenuController.cs" />
-     <Compile Include="Assets\MusicScript.cs" />
-     <Compile Include="Assets\MusicToggle.cs" />
      <Compile Include="Assets\Scripts\bulletController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\DifficultySlider.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\HealthToUIManager.cs" />
      <Compile Include="Assets\Scripts\Leaderboard.cs" />
+     <Compile Include="Assets\Scripts\LoginLogic.cs" />
+     <Compile Include="Assets\Scripts\MainMenuController.cs" />
+     <Compile Include="Assets\Scripts\MusicScript.cs" />
+     <Compile Include="Assets\Scripts\MusicToggle.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Restarter.cs" />
+     <Compile Include="Assets\Scripts\RetryLogicManager.cs" />
      <Compile Include="Assets\Scripts\scoreManager.cs" />
+     <Compile Include="Assets\Scripts\SlowCamMove.cs" />
      <Compile Include="Assets\Scripts\TimerScript.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\ZombieController.cs" />

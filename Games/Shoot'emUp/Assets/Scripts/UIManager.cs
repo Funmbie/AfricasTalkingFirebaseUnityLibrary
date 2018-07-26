@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour {
 	public GameObject inGamePanel,pausePanel;
+	public Text gameOvertxt;
 	// Use this for initialization
 	void Start () {
+		gameOvertxt.text = "";
 		unPause();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void GameOver()
+	{
+		gameOvertxt.text = "Game Over";
 	}
 
 	public void pause()
