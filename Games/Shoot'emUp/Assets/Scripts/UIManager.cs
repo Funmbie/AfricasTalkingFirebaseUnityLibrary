@@ -2,12 +2,22 @@
 using UnityEngine;
 
 public class UIManager : MonoBehaviour {
-	public GameObject inGamePanel,pausePanel;
+	public GameObject inGamePanel,pausePanel,storePanel;
 	public Text gameOvertxt;
 	// Use this for initialization
 	void Start () {
 		gameOvertxt.text = "";
 		unPause();
+	}
+
+	public void openStore()
+	{
+		storePanel.SetActive(true);
+	}
+
+	public void closeStore()
+	{
+		storePanel.SetActive(false);
 	}
 
 	public void GameOver()
@@ -25,5 +35,6 @@ public class UIManager : MonoBehaviour {
 	{
 		pausePanel.SetActive(false);
 		inGamePanel.SetActive(true);
+		closeStore();
 	}
 }

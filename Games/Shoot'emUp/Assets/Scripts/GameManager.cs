@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	PlayerController playerController;
 	ZombieManager zombieManager;
 	UIManager uiManager;
-	bool isPaused;
+	[HideInInspector]public bool isPaused;
 	// Use this for initialization
 	void Start () {
 		isPaused = false;

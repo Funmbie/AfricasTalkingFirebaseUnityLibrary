@@ -650,7 +650,7 @@ namespace AfricasTalkingUnityClass
             return result;
         }
 
-        public int getGameCount(string gamer_id,string game_id)
+        /*public int getGameCount(string gamer_id,string game_id)
         {
             string idToken = "";
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
@@ -690,7 +690,7 @@ namespace AfricasTalkingUnityClass
             words = splitFunction(result, ',');
 
             return 0;
-        }
+        }*/
 
         //Africa's Talking API Functions
 

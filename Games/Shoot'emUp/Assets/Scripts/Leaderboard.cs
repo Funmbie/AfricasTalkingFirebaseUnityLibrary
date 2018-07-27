@@ -6,7 +6,7 @@ using System;
 
 public class Leaderboard : MonoBehaviour {
 	public Image entryPanel;
-	int limit = 12;
+	int limit = 10;
 	int addCount;
 	LeaderboardResponse[] response;
 

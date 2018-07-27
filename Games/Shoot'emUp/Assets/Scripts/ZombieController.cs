@@ -5,11 +5,13 @@ using UnityEngine;
 public class ZombieController : MonoBehaviour {
 	[HideInInspector] public int Health;
 	GameObject target;
+	GameManager gameManager;
 	
 	// Use this for initialization
 	void Start () {
 		Health = 150;
 		target = GameObject.FindGameObjectWithTag("Player");
+		gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
@@ -23,9 +25,11 @@ public class ZombieController : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
+		if(!gameManager.isPaused){
 		if(col.CompareTag("Player"))
 		{
 			col.gameObject.GetComponent<PlayerController>().Health -= 0.5f;
+		}
 		}
 	}
 

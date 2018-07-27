@@ -40,6 +40,8 @@ public class ZombieManager : MonoBehaviour {
 		Instantiate(zombiePrefab, spawnPoints[rand].position,Quaternion.identity);
 		Invoke("SpawnZombie",delay);
 		}
+		else
+		Invoke("SpawnZombie",delay);
 	}
 
 	public void pauseZombies()

@@ -26,6 +26,23 @@ public class RetryLogicManager : MonoBehaviour {
 			//Take error and display
 			StartCoroutine(callForward(leaderboardPanel,request));
 		}
+
+		if(main>3000)
+		{
+			//Send them airtime
+			Invoke("sendAirtime",2f);
+		}
+	}
+
+	void sendAirtime()
+	{
+		var at_u = new AfricasTalkingUnityGateway();
+		string username="sandbox";
+		string apikey = "39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b";
+		string gamer_id = PlayerPrefs.GetString("token","");
+		string amount="100";
+		if((at_u.sendAirtime(username, apikey, gamer_id, amount))=="OK")
+		StartCoroutine(callForward(leaderboardPanel,"You got airtime!!"));
 	}
 
 	IEnumerator callForward(GameObject g,string msg)
@@ -57,11 +74,6 @@ public class RetryLogicManager : MonoBehaviour {
 		}
 		g.SetActive(false);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void Yes()
 	{
@@ -70,6 +82,11 @@ public class RetryLogicManager : MonoBehaviour {
 
 	public void No()
 	{
+		GameObject musicObject = GameObject.FindGameObjectWithTag("Music");
+		
+		if(musicObject)
+		Destroy(musicObject);
+		
 		SceneManager.LoadScene(0);
 	}
 }

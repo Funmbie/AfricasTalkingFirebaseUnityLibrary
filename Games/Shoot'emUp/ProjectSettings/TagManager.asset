@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Zombie
+  - Music
   layers:
   - Default
   - TransparentFX

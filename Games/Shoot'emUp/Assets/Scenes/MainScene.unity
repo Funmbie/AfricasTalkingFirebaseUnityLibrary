@@ -2015,8 +2015,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 447868945}
   m_TextComponent: {fileID: 428944742}
   m_Placeholder: {fileID: 1984605976}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -4445,7 +4445,7 @@ GameObject:
   - component: {fileID: 1368067587}
   m_Layer: 0
   m_Name: MusicObject
-  m_TagString: Untagged
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6656,7 +6656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030462852, y: 0}
+  m_AnchoredPosition: {x: -0.000004911144, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1984605974

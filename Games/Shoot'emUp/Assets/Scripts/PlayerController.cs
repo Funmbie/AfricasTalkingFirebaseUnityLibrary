@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		Score = 0;
 		Health = 100f;
-		fireTime = PlayerPrefs.GetFloat("FireTime",2.4f);
+		fireTime = 1.2f;
 	}
 	
 	// Update is called once per frame
@@ -29,12 +29,13 @@ public class PlayerController : MonoBehaviour {
 		{
 			StartCoroutine(Fire());
 		}
+		float input = Input.GetAxis("Mouse X");
+		transform.Rotate(0f,input*90f*Time.deltaTime,0f);
 	}
 
 	void Move(float x, float z)
 	{
-		transform.Translate(0f,0f,z*14f*Time.deltaTime);
-		transform.Rotate(0f,x*120f*Time.deltaTime,0f);
+		transform.Translate(x*14f*Time.deltaTime,0f,z*14f*Time.deltaTime);
 	}
 
 	void OnTriggerStay(Collider col)
