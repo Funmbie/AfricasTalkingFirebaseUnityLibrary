@@ -27,6 +27,8 @@ public class RetryLogicManager : MonoBehaviour {
 			StartCoroutine(callForward(leaderboardPanel,request));
 		}
 
+		Debug.Log(request);
+
 		if(main>3000)
 		{
 			//Send them airtime

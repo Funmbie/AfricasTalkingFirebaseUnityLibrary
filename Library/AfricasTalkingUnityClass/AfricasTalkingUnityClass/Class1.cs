@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using AfricasTalkingCS;
 using Newtonsoft.Json;
 using System.Net;
@@ -21,10 +19,6 @@ namespace AfricasTalkingUnityClass
             public string publisher;
             public string year;
         }
-        class GameId
-        {
-            public string name;
-        }
         class User
         {
             public string date;
@@ -42,6 +36,15 @@ namespace AfricasTalkingUnityClass
                 this.password = password;
                 this.phone = phone;
             }
+        }
+        class GameId
+        {
+            public string name;
+        }
+        class Count
+        {
+            public string game_id;
+            public int count;
         }
         class Leaderboard
         {
@@ -147,34 +150,39 @@ namespace AfricasTalkingUnityClass
 
             //Read leaderboard
             string result = getJson("https://atgames-infra-test.firebaseio.com/profiles/.json");
-            string[] words = splitFunction(result, '{');
-            result = joinFunction(words);
-            words = splitFunction(result, '}');
-            result = joinFunction(words);
-            words = splitFunction(result, ',');
-
-            //Get game id and gamer id
-            int counter = 0;
-            string[] usernames = new string[words.Length / 5];
-            string[] emails = new string[words.Length / 5];
-
-            for (int i = 0; i < words.Length; i += 5)
+            if (result.Length > 20)
             {
-                string trim = words[i + 2].Substring(8, words[i + 2].Length - 9);
-                usernames[counter] = trim;
-                trim = words[i].Substring(32, words[i].Length - 33);
-                emails[counter] = trim;
-                counter++;
-            }
+                string[] words = splitFunction(result, '{');
+                result = joinFunction(words);
+                words = splitFunction(result, '}');
+                result = joinFunction(words);
+                words = splitFunction(result, ',');
 
-            for (int i = 0; i < usernames.Length; i++)
-            {
-                if ((usernames[i] == name)||(emails[i] == email))
+                //Get game id and gamer id
+                int counter = 0;
+                string[] usernames = new string[words.Length / 5];
+                string[] emails = new string[words.Length / 5];
+
+                for (int i = 0; i < words.Length; i += 5)
                 {
+                    string trim = words[i + 2].Substring(8, words[i + 2].Length - 9);
+                    usernames[counter] = trim;
+                    trim = words[i].Substring(32, words[i].Length - 33);
+                    emails[counter] = trim;
+                    counter++;
+                }
+
+                for (int i = 0; i < usernames.Length; i++)
+                {
+                    if ((usernames[i] == name) || (emails[i] == email))
+                    {
                         exists = true;
                         break;
+                    }
                 }
             }
+            else
+                exists = false;
 
             if (!exists)
             {
@@ -191,32 +199,31 @@ namespace AfricasTalkingUnityClass
                     request.GetRequestStream().Write(buffer, 0, buffer.Length);
                     var response = request.GetResponse();
                     json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
 
-                    //Add user to firebase client
-                    try
-                    {
-                        TokenRequest signUp = new TokenRequest();
-                        signUp.email = email;
-                        signUp.password = password;
-                        signUp.returnSecureToken = true;
-                        json = JsonConvert.SerializeObject(signUp);
-                        string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
-                        request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=" + apikey);
-                        request.Method = "POST";
-                        request.ContentType = "application/json";
-                        buffer = Encoding.UTF8.GetBytes(json);
-                        request.ContentLength = buffer.Length;
-                        request.GetRequestStream().Write(buffer, 0, buffer.Length);
-                        response = request.GetResponse();
-                        json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
-                        TokenResponse tokenResponse = new TokenResponse();
-                        tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(json);
-                    }
-                    catch (Exception e)
-                    {
-                        return e.Message;
-                    }
-
+                //Add user to firebase client
+                try
+                {
+                    TokenRequest signUp = new TokenRequest();
+                    signUp.email = email;
+                    signUp.password = password;
+                    signUp.returnSecureToken = true;
+                    json = JsonConvert.SerializeObject(signUp);
+                    string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                    var request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=" + apikey);
+                    request.Method = "POST";
+                    request.ContentType = "application/json";
+                    var buffer = Encoding.UTF8.GetBytes(json);
+                    request.ContentLength = buffer.Length;
+                    request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                    var response = request.GetResponse();
+                    json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                    TokenResponse tokenResponse = new TokenResponse();
+                    tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(json);
                     return "OK";
                 }
                 catch (Exception e)
@@ -283,55 +290,62 @@ namespace AfricasTalkingUnityClass
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
 
             string result = getJson("https://atgames-infra-test.firebaseio.com/profiles/.json");
-            string[] words = splitFunction(result, '{');
-            result = joinFunction(words);
-            words = splitFunction(result, '}');
-            result = joinFunction(words);
-            words = splitFunction(result, ',');
-
-            int counter = 0;
-            string[] emails = new string[words.Length / 5];
-            string[] phones = new string[words.Length / 5];
-            string[] passwords = new string[words.Length /5];
-            string[] keys = new string[words.Length / 5];
-
-            for (int i = 0; i < words.Length; i += 5)
+            if (result.Length > 12)
             {
-                string trim = words[i].Substring(32, words[i].Length - 33);
-                emails[counter] = trim;
-                trim = words[i + 3].Substring(12, words[i + 3].Length - 13);
-                passwords[counter] = trim;
-                trim = words[i + 4].Substring(9, words[i + 4].Length - 10);
-                phones[counter] = trim;
-                trim = words[i].Substring(1, 20);
-                keys[counter] = trim;
-                counter++;
-            }
-            password = sha256(password);
+                string[] words = splitFunction(result, '{');
+                result = joinFunction(words);
+                words = splitFunction(result, '}');
+                result = joinFunction(words);
+                words = splitFunction(result, ',');
 
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (passwords[i] == password)
+                int counter = 0;
+                string[] emails = new string[words.Length / 5];
+                string[] phones = new string[words.Length / 5];
+                string[] passwords = new string[words.Length / 5];
+                string[] keys = new string[words.Length / 5];
+
+                for (int i = 0; i < words.Length; i += 5)
                 {
-                    if (phones[i] == credentials)
+                    string trim = words[i].Substring(32, words[i].Length - 33);
+                    emails[counter] = trim;
+                    trim = words[i + 3].Substring(12, words[i + 3].Length - 13);
+                    passwords[counter] = trim;
+                    trim = words[i + 4].Substring(9, words[i + 4].Length - 10);
+                    phones[counter] = trim;
+                    trim = words[i].Substring(1, 20);
+                    keys[counter] = trim;
+                    counter++;
+                }
+                password = sha256(password);
+
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    if (passwords[i] == password)
                     {
-                        return "OK" + keys[i];
-                    }
-                    else
-                    {
-                        if (emails[i] == credentials)
+                        if (phones[i] == credentials)
                         {
                             return "OK" + keys[i];
                         }
                         else
                         {
-                            return "Error Logging In. Please try again later";
+                            if (emails[i] == credentials)
+                            {
+                                return "OK" + keys[i];
+                            }
+                            else
+                            {
+                                return "Error Logging In. Please try again later";
+                            }
                         }
                     }
                 }
             }
+            else
+            {
+                return "Not Registered";
+            }
 
-            return "Empty Values";
+            return "Done";
         }
 
         public string Delete(string gamer_id)
@@ -445,6 +459,7 @@ namespace AfricasTalkingUnityClass
                     request.GetRequestStream().Write(buffer, 0, buffer.Length);
                     var response = request.GetResponse();
                     json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                    addCountFunction(gamer_id, game_id);
 
                     return "OK";
                 }
@@ -468,6 +483,7 @@ namespace AfricasTalkingUnityClass
                     request.GetRequestStream().Write(buffer, 0, buffer.Length);
                     var response = request.GetResponse();
                     json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                    addCountFunction(gamer_id, game_id);
 
                     return "+OK";
                 }
@@ -523,6 +539,7 @@ namespace AfricasTalkingUnityClass
                 var response = request.GetResponse();
                 json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
                 //Increment count on that gameid
+                string x = addCountFunction(gamer_id,game_id);
 
                 return "OK";
             }
@@ -650,7 +667,12 @@ namespace AfricasTalkingUnityClass
             return result;
         }
 
-        /*public int getGameCount(string gamer_id,string game_id)
+        public string clearLeaderboard(string game_id)
+        {
+            return "";
+        }
+
+        public int getGameCount(string gamer_id,string game_id)
         {
             string idToken = "";
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
@@ -679,18 +701,62 @@ namespace AfricasTalkingUnityClass
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 return 0;
             }
             string result = getJson("https://atgames-infra-test.firebaseio.com/count/.json?auth=" + idToken);
-            string[] words = splitFunction(result, '{');
-            result = joinFunction(words);
-            words = splitFunction(result, '}');
-            result = joinFunction(words);
-            words = splitFunction(result, ',');
+            if (result.Length > 12)
+            {
+                string[] words = splitFunction(result, '{');
+                result = joinFunction(words);
+                words = splitFunction(result, '}');
+                result = joinFunction(words);
+                words = splitFunction(result, ',');
+                string[] keys = new string[words.Length / 2];
+                string[] gameids = new string[words.Length / 2];
+                int[] counts = new int[words.Length / 2];
 
-            return 0;
-        }*/
+                //If the id is equal, take the corresponding count and return it
+
+
+                //Get game id and gamer id
+                int counter = 0;
+
+                for (int i = 0; i < words.Length; i += 2)
+                {
+                    string trim = words[i + 1].Substring(11, words[i + 1].Length - 12);
+                    gameids[counter] = trim;
+                    trim = words[i].Substring(1, 20);
+                    keys[counter] = trim;
+                    trim = words[i].Substring(31, words[i].Length - 31);
+                    counts[counter] = int.Parse(trim);
+                    counter++;
+                }
+
+                //Check if the requested game_id exists
+                bool exists = false;
+                int count = 0;
+
+                for (int i = 0; i < gameids.Length; i++)
+                {
+                    if (gameids[i] == game_id)
+                    {
+                        exists = true;
+                        count = counts[i];
+                        break;
+                    }
+                }
+
+                if (exists)
+                    return count;
+                else
+                    //else return zero
+                    return 0;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         //Africa's Talking API Functions
 
@@ -719,6 +785,22 @@ namespace AfricasTalkingUnityClass
             return "Done";
         }
 
+        public string sendAirtime(string username, string apikey, string gamer_id, string amount, string currency = "KES")
+        {
+            string phoneNumber = retrieveUserInfo(gamer_id, "phone");
+            var airtimerecipients = @"{'phoneNumber':'" + phoneNumber + "','amount':'" + currency + " " + amount + "'}"; // Send any JSON object of n-Length
+            var gateway = new AfricasTalkingGateway(username, apikey);
+            try
+            {
+                var airtimeTransaction = gateway.SendAirtime(airtimerecipients);
+                return "OK";
+            }
+            catch (AfricasTalkingGatewayException e)
+            {
+                return e.Message;
+            }
+        }
+
         public string inAppPurchase(string username, string apikey,string gamer_id, string productName,string currency,decimal amount, string channel, Dictionary<string,string> metadata = null)
         {
             string phoneNumber = retrieveUserInfo(gamer_id,"phone");
@@ -736,19 +818,33 @@ namespace AfricasTalkingUnityClass
             }
         }
 
-        public string sendAirtime(string username,string apikey,string gamer_id, string amount, string currency="KES")
+        public string B2C(string username, string apikey, string gamer_id, decimal amount, string reason, string productName, string currencyCode = "KES")
         {
-            string phoneNumber = retrieveUserInfo(gamer_id,"phone");
-            var airtimerecipients = @"{'phoneNumber':'"+phoneNumber+"','amount':'"+currency+" "+amount+"'}"; // Send any JSON object of n-Length
+            string PhoneNum = retrieveUserInfo(gamer_id,"phone");
+            string Name = retrieveUsername(gamer_id);
+
+            // We invoke our gateway
             var gateway = new AfricasTalkingGateway(username, apikey);
+
+            // Let's create a bunch of people who'll be receiving the refund or monthly salary etc...
+            var person = new MobileB2CRecepient(Name, PhoneNum, currencyCode, amount);
+
+            // we can add metadata...like why we're paying them/refunding them etc...
+            person.AddMetadata("reason", reason);
+            IList<MobileB2CRecepient> payment = new List<MobileB2CRecepient>
+            {
+                person
+            };
+
+            // let's refund them so that they can keep saving the planet
             try
             {
-                var airtimeTransaction = gateway.SendAirtime(airtimerecipients);
+                var response = gateway.MobileB2C(productName, payment);
                 return "OK";
             }
             catch (AfricasTalkingGatewayException e)
             {
-                return e.Message;
+                return ("We ran into problems: " + e.StackTrace + e.Message);
             }
         }
 
@@ -763,6 +859,138 @@ namespace AfricasTalkingUnityClass
                 hash.Append(theByte.ToString("x2"));
             }
             return hash.ToString();
+        }
+
+        string addCountFunction(string gamer_id, string game_id)
+        {
+            string idToken = "";
+            bool exists = false;
+            int count = 0;
+            string key = "";
+
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+            string reqemail = retrieveUserInfo(gamer_id, "email");
+            string reqpass = retrieveUserInfo(gamer_id, "password");
+
+            TokenRequest tokenRequest = new TokenRequest();
+            tokenRequest.email = reqemail;
+            tokenRequest.password = reqpass;
+            tokenRequest.returnSecureToken = true;
+            string jsn = JsonConvert.SerializeObject(tokenRequest);
+            try
+            {
+                string apikey = "AIzaSyDHT4x9HNQwi_LedoqNWylBmhMZQDSEy9M";
+                var request = WebRequest.CreateHttp("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + apikey);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                var buffer = Encoding.UTF8.GetBytes(jsn);
+                request.ContentLength = buffer.Length;
+                request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                var response = request.GetResponse();
+                jsn = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+                TokenResponse tokenResponse = new TokenResponse();
+                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(jsn);
+                idToken = tokenResponse.idToken;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+            //Read Count Json
+            string result = getJson("https://atgames-infra-test.firebaseio.com/count/.json?auth=" + idToken);
+            //Strip extra things
+            if (result.Length > 30)
+            {
+                string[] words = splitFunction(result, '{');
+                result = joinFunction(words);
+                words = splitFunction(result, '}');
+                result = joinFunction(words);
+                words = splitFunction(result, ',');
+                //Fill the arrays game id and count
+                string[] keys = new string[words.Length / 2];
+                string[] gameids = new string[words.Length / 2];
+                int[] counts = new int[words.Length / 2];
+
+                int counter = 0;
+
+                for (int i = 0; i < words.Length; i += 2)
+                {
+                    string trim = words[i+1].Substring(11, words[i+1].Length - 12);
+                    gameids[counter] = trim;
+                    trim = words[i].Substring(1, 20);
+                    keys[counter] = trim;
+                    trim = words[i].Substring(31, words[i].Length - 31);
+                    counts[counter] = int.Parse(trim);
+                    counter++;
+                }
+
+                //Check if the requested game_id exists
+                for (int i = 0; i < gameids.Length; i++)
+                {
+                    if (gameids[i] == game_id)
+                    {
+                        exists = true;
+                        count = counts[i];
+                        key = keys[i];
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                exists = false;
+            }
+
+            //if game id exists in the json, patch the data
+            if (exists)
+            {
+                count += 1;
+                string json = JsonConvert.SerializeObject(new { count = count });
+
+                try
+                {
+                    var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/count/" + key + "/.json?auth=" + idToken);
+                    request.Method = "PATCH";
+                    request.ContentType = "application/json";
+                    var buffer = Encoding.UTF8.GetBytes(json);
+                    request.ContentLength = buffer.Length;
+                    request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                    var response = request.GetResponse();
+                    json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+
+                    return "OK";
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
+            //Else add new data
+            else
+            {
+                Count newCounter = new Count();
+                newCounter.count = 1;
+                newCounter.game_id = game_id;
+                string json = JsonConvert.SerializeObject(newCounter);
+                try
+                {
+                    var request = WebRequest.CreateHttp("https://atgames-infra-test.firebaseio.com/count/.json?auth=" + idToken);
+                    request.Method = "POST";
+                    request.ContentType = "application/json";
+                    var buffer = Encoding.UTF8.GetBytes(json);
+                    request.ContentLength = buffer.Length;
+                    request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                    var response = request.GetResponse();
+                    json = (new StreamReader(response.GetResponseStream())).ReadToEnd();
+
+                    return "+OK";
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
         }
 
         string retrieveUserInfo(string gamer_id, string key)

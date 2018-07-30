@@ -23,6 +23,14 @@ public class Leaderboard : MonoBehaviour {
 	void Start () {
 		var at_u = new AfricasTalkingUnityGateway();
 		string token = PlayerPrefs.GetString("token","");
+		int query = at_u.getGameCount(token,"-LI67SV_Xj_DldmfUiaZ");
+
+		string query2 = at_u.B2C("sandbox","39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b",token,1000m,"BeatBoss 3000", "Stone");
+
+		if(query<limit)
+		{
+			limit = query;
+		}
 
 		response = new LeaderboardResponse[limit];
 		for(int i=0;i<limit;i++)

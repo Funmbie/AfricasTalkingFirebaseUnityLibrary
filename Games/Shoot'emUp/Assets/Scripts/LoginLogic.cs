@@ -6,7 +6,8 @@ public class LoginLogic : MonoBehaviour {
 	
 	public Text username;
 	public InputField loginCreds,loginPassword;
-	public InputField regName,regEmail,regLoc,regPhone,regPass;
+	public InputField regName,regEmail,regPhone,regPass;
+	public Dropdown regLoc;
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +42,7 @@ public class LoginLogic : MonoBehaviour {
 	{
 		var at_u = new AfricasTalkingUnityGateway();
 		string a = regEmail.text;
-		string b = regLoc.text;
+		string b = determineValue(regLoc.value);
 		string c = regName.text;
 		string d = regPass.text;
 		string e = regPhone.text;
@@ -55,6 +56,18 @@ public class LoginLogic : MonoBehaviour {
 		{
 			username.text = request;
 		}
+	}
+
+	string determineValue(int i)
+	{
+		if(i==0)
+		return "Kenya";
+		else if(i==1)
+		return "Nigeria";
+		else if(i==2)
+		return "Uganda";
+		else
+		return "Null";
 	}
 
 
