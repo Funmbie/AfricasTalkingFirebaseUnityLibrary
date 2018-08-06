@@ -25,8 +25,6 @@ public class Leaderboard : MonoBehaviour {
 		string token = PlayerPrefs.GetString("token","");
 		int query = at_u.getGameCount(token,"-LI67SV_Xj_DldmfUiaZ");
 
-		string query2 = at_u.B2C("sandbox","39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b",token,1000m,"BeatBoss 3000", "Stone");
-
 		if(query<limit)
 		{
 			limit = query;
@@ -78,10 +76,5 @@ public class Leaderboard : MonoBehaviour {
 			addCount += 55;
 			//add next 4 entries from array
 		}
-	}
-
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

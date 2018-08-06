@@ -358,6 +358,7 @@ namespace AfricasTalkingUnityClass
                 request.Method = "DELETE";
                 request.ContentType = "application/json";
                 var response = request.GetResponse();
+                //Delete the user from the authentication side
                 return "OK";
             }
 
@@ -667,11 +668,6 @@ namespace AfricasTalkingUnityClass
             return result;
         }
 
-        public string clearLeaderboard(string game_id)
-        {
-            return "";
-        }
-
         public int getGameCount(string gamer_id,string game_id)
         {
             string idToken = "";
@@ -785,9 +781,48 @@ namespace AfricasTalkingUnityClass
             return "Done";
         }
 
+        public string plainSMS(string username, string apikey, string msg, string phone)
+        {
+            try
+            {
+                var gateway = new AfricasTalkingGateway(username, apikey);
+                var sms = gateway.SendMessage(phone, msg);
+                foreach (var res in sms["SMSMessageData"]["Recipients"])
+                {
+                    if (res["status"] == "Success")
+                    {
+                        return "OK";
+                    }
+                    else
+                        return res["status"];
+                }
+            }
+            catch (AfricasTalkingGatewayException exception)
+            {
+                return exception.Message;
+            }
+
+            return "Done";
+        }
+
         public string sendAirtime(string username, string apikey, string gamer_id, string amount, string currency = "KES")
         {
             string phoneNumber = retrieveUserInfo(gamer_id, "phone");
+            var airtimerecipients = @"{'phoneNumber':'" + phoneNumber + "','amount':'" + currency + " " + amount + "'}"; // Send any JSON object of n-Length
+            var gateway = new AfricasTalkingGateway(username, apikey);
+            try
+            {
+                var airtimeTransaction = gateway.SendAirtime(airtimerecipients);
+                return "OK";
+            }
+            catch (AfricasTalkingGatewayException e)
+            {
+                return e.Message;
+            }
+        }
+
+        public string plainAirtime(string username, string apikey, string phoneNumber, string amount, string currency = "KES")
+        {
             var airtimerecipients = @"{'phoneNumber':'" + phoneNumber + "','amount':'" + currency + " " + amount + "'}"; // Send any JSON object of n-Length
             var gateway = new AfricasTalkingGateway(username, apikey);
             try
@@ -818,6 +853,21 @@ namespace AfricasTalkingUnityClass
             }
         }
 
+        public string plainIAP(string username, string apikey,string phoneNumber, string productName,string currency,decimal amount, string channel, Dictionary<string,string> metadata = null)
+        {
+            var gateway = new AfricasTalkingGateway(username, apikey);
+
+            try
+            {
+                var checkout = gateway.Checkout(productName, phoneNumber, currency, amount, channel, metadata);
+                return "OK";
+            }
+            catch (AfricasTalkingGatewayException e)
+            {
+                return e.Message;
+            }
+        }
+
         public string B2C(string username, string apikey, string gamer_id, decimal amount, string reason, string productName, string currencyCode = "KES")
         {
             string PhoneNum = retrieveUserInfo(gamer_id,"phone");
@@ -828,6 +878,35 @@ namespace AfricasTalkingUnityClass
 
             // Let's create a bunch of people who'll be receiving the refund or monthly salary etc...
             var person = new MobileB2CRecepient(Name, PhoneNum, currencyCode, amount);
+
+            // we can add metadata...like why we're paying them/refunding them etc...
+            person.AddMetadata("reason", reason);
+            IList<MobileB2CRecepient> payment = new List<MobileB2CRecepient>
+            {
+                person
+            };
+
+            // let's refund them so that they can keep saving the planet
+            try
+            {
+                var response = gateway.MobileB2C(productName, payment);
+                return "OK";
+            }
+            catch (AfricasTalkingGatewayException e)
+            {
+                return ("We ran into problems: " + e.StackTrace + e.Message);
+            }
+        }
+
+        public string plainB2C(string username, string apikey, string phone, decimal amount, string reason, string productName, string currencyCode = "KES")
+        {
+            string Name = "John Doe";
+
+            // We invoke our gateway
+            var gateway = new AfricasTalkingGateway(username, apikey);
+
+            // Let's create a bunch of people who'll be receiving the refund or monthly salary etc...
+            var person = new MobileB2CRecepient(Name, phone, currencyCode, amount);
 
             // we can add metadata...like why we're paying them/refunding them etc...
             person.AddMetadata("reason", reason);

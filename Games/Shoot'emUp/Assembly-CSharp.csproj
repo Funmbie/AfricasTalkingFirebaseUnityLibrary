@@ -113,11 +113,11 @@
      <Compile Include="Assets\Scripts\RetryLogicManager.cs" />
      <Compile Include="Assets\Scripts\scoreManager.cs" />
      <Compile Include="Assets\Scripts\SlowCamMove.cs" />
+     <Compile Include="Assets\Scripts\StoreLogic.cs" />
      <Compile Include="Assets\Scripts\TimerScript.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\ZombieController.cs" />
      <Compile Include="Assets\Scripts\ZombieManager.cs" />
-     <Compile Include="Assets\StoreLogic.cs" />
      <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\ImportedPackages\PostProcessing\Resources\Shaders\Fog.shader" />
