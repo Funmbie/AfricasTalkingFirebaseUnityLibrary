@@ -8,14 +8,16 @@ Hey guys!! So this project is a library that is meant to help Unity3D developers
 
 ```using AfricasTalkingUnityClass;```
 
-- Declare an instance of the class 
+- Declare an instance of the class
+
 ```var at_u = new AfricasTalkingUnityGateway();```
 
 - Feel free to call the functions available
 - Note: the functions return string value. The responses will be looked at below
 
 ### Functions and Responses
-i. Game Functions for registering and deleting your game. These functions should be called only once. Also keep your game id safe to ensure that it can't be used by anyone else.
+#### i. Game Functions for registering and deleting your game
+These functions should be called only once. Also keep your game id safe to ensure that it can't be used by anyone else.
 
 ##### Registering a game
 The token returned is your game id. Save it in a txt file and in somewhere private. We don't want Mr Robot messing with this.
@@ -32,7 +34,10 @@ if(query=='OK')
 //So your game had a good run and now it has finally been deleted successfully
 else{Debug.Log(query);}
 ```
-ii. User Functions will help you in profile management. Ensure the users enter valid emails. Before submitting to the library to prevent errors.
+
+
+#### ii. User Functions
+These will help you in profile management. Ensure the users enter valid emails. Before submitting to the library to prevent errors.
 
 ##### Register a new Gamer
 This helps you create users. The great thing is an account created in a game can be used by another game making use of the same library.
@@ -69,7 +74,7 @@ Debug.Log('Edited Successfully');
 else Debug.Log(query);
 ```
 
-##### DeleteGame
+##### Delete Game
 delete a gamer's account. It returns OK or error message.
 
 ```
@@ -79,7 +84,8 @@ Debug.Log('Deleted Successfully');
 else Debug.Log(query);
 ```
 
-iii. Africa's Talking API Functions for airtime, mobile checkout and sms.
+
+#### iii. Africa's Talking API Functions for airtime, mobile checkout and sms.
 
 ##### Send SMS to a gamer's account
 sends an sms to the phone number of the gamer id passed. You want to use your Africa's talking username and apikey for the respective parameters then add the message and gamer id. It returns an OK or an error message.
