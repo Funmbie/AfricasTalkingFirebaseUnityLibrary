@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using AfricasTalkingUnityClass;
+using Newtonsoft.Json;
+
+class PaymentResponse
+{
+	public string status;
+	public string description;
+	public string transactionId;
+	public string providerChannel;
+}
 
 public class StoreLogic : MonoBehaviour {
 	public GameObject hailStone;
@@ -16,11 +25,6 @@ public class StoreLogic : MonoBehaviour {
 		uiManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIManager>();
 		gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void CallHailstone()
 	{
@@ -33,10 +37,13 @@ public class StoreLogic : MonoBehaviour {
 
 		var at_u = new AfricasTalkingUnityGateway();
 		string request = at_u.inAppPurchase(username, apikey,gamer_id, product,"KES",amount, channel);
-		if(request=="OK")
-		processHailStone();
-
+		//string request = at_u.plainIAP(username,apikey,"0701951089",product,"KES",amount,channel);
+		PaymentResponse response = JsonConvert.DeserializeObject<PaymentResponse>(request);
 		Debug.Log(request);
+		if(response.transactionId.Substring(0,3)=="ATP"){
+		processHailStone();
+		Debug.Log(response.transactionId);
+		}
 	}
 
 	public void AddHealth()
@@ -44,14 +51,18 @@ public class StoreLogic : MonoBehaviour {
 		string username = "sandbox";
 		string apikey = "39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b";
 		string gamer_id = PlayerPrefs.GetString("token","");
-		string product = "Timee";
+		string product = "Time";
 		string channel = "12345";
 		decimal amount = 70m; 
+		string number = "+254701951089";
 
 		var at_u = new AfricasTalkingUnityGateway();
 		string request = at_u.inAppPurchase(username, apikey,gamer_id, product,"KES",amount, channel);
-		if(request=="OK")
+		PaymentResponse response = JsonConvert.DeserializeObject<PaymentResponse>(request);
+		if(response.transactionId.Substring(0,3)=="ATP"){
 		ProcessHealth();
+		Debug.Log(response.transactionId);
+		}
 	}
 
 	void ProcessHealth()

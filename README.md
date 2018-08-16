@@ -97,14 +97,42 @@ Debug.Log('Message sent Successfully');
 else Debug.Log(query);
 ``` 
 ##### In-App Purchase using M-Pesa to a gamer's account
-This function initiates mobile checkout on the device of the gamer using the token. It returns OK or error message.
->**Note** that the function returns 'OK' when the mobile checkout is initiated successfully and not when it is >completed. You will have to take care of that from your callback url. You can do this by sending the data gotten on >the callback url to a database and then calling another function to check the status of the transaction once you >get an OK from the function
+This function initiates mobile checkout on the device of the gamer using the token. It returns a json response using the class below:
 
 ```
-string query = at_u.inAppPurchase(string username, string apikey,string gamer_id, string productName,string currency,decimal amount, string channel, Dictionary<string,string> metadata = null);
-if (query=='OK')
-Debug.Log('Payment Initiated Successfully');
-else Debug.Log(query);
+class PaymentResponse
+{
+	public string status;
+	public string description;
+	public string transactionId;
+	public string providerChannel;
+}
+```
+
+Here, we will also have a callback url registered. We can send the data to a database from the callback url so we can reference the status of the transaction later.
+
+##### Example
+An example is adding health to a user. Here we get the response and check our database to see if the process was successful.
+
+```
+string username = "sandbox";
+string apikey = "key";
+string gamer_id = PlayerPrefs.GetString("token","");
+string product = "ProductName";
+string channel = "XXXXX";
+decimal amount = 100m; 
+
+var at_u = new AfricasTalkingUnityGateway();
+string request = at_u.inAppPurchase(username, apikey,gamer_id, product,"KES",amount, channel);
+PaymentResponse response = JsonConvert.DeserializeObject<PaymentResponse>(request);
+Debug.Log(request);
+if(response.transactionId.Substring(0,3)=="ATP"){
+AddHealth();
+//This is the transaction id
+Debug.Log(response.transactionId);
+//Call a script to check the status of the transaction_id in your database
+
+}
 ```
 
 ##### Sending Airtime to a Gamer

@@ -32,7 +32,7 @@ public class RetryLogicManager : MonoBehaviour {
 		if(main>3000)
 		{
 			//Send them airtime
-			Invoke("sendAirtime",2f);
+			Invoke("sendAirtime",5f);
 		}
 	}
 

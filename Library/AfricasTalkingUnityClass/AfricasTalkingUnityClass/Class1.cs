@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AfricasTalkingCS;
 using Newtonsoft.Json;
 using System.Net;
@@ -758,6 +759,8 @@ namespace AfricasTalkingUnityClass
 
         public string SMS(string username, string apikey, string msg, string gamer_id)
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+
             try
             {
                 var gateway = new AfricasTalkingGateway(username, apikey);
@@ -783,6 +786,8 @@ namespace AfricasTalkingUnityClass
 
         public string plainSMS(string username, string apikey, string msg, string phone)
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+
             try
             {
                 var gateway = new AfricasTalkingGateway(username, apikey);
@@ -807,6 +812,8 @@ namespace AfricasTalkingUnityClass
 
         public string sendAirtime(string username, string apikey, string gamer_id, string amount, string currency = "KES")
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+
             string phoneNumber = retrieveUserInfo(gamer_id, "phone");
             var airtimerecipients = @"{'phoneNumber':'" + phoneNumber + "','amount':'" + currency + " " + amount + "'}"; // Send any JSON object of n-Length
             var gateway = new AfricasTalkingGateway(username, apikey);
@@ -823,6 +830,8 @@ namespace AfricasTalkingUnityClass
 
         public string plainAirtime(string username, string apikey, string phoneNumber, string amount, string currency = "KES")
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+
             var airtimerecipients = @"{'phoneNumber':'" + phoneNumber + "','amount':'" + currency + " " + amount + "'}"; // Send any JSON object of n-Length
             var gateway = new AfricasTalkingGateway(username, apikey);
             try
@@ -838,6 +847,8 @@ namespace AfricasTalkingUnityClass
 
         public string inAppPurchase(string username, string apikey,string gamer_id, string productName,string currency,decimal amount, string channel, Dictionary<string,string> metadata = null)
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
+
             string phoneNumber = retrieveUserInfo(gamer_id,"phone");
 
             var gateway = new AfricasTalkingGateway(username, apikey);
@@ -845,7 +856,7 @@ namespace AfricasTalkingUnityClass
             try
             {
                 var checkout = gateway.Checkout(productName, phoneNumber, currency, amount, channel, metadata);
-                return "OK";
+                return checkout;
             }
             catch (AfricasTalkingGatewayException e)
             {
@@ -855,12 +866,13 @@ namespace AfricasTalkingUnityClass
 
         public string plainIAP(string username, string apikey,string phoneNumber, string productName,string currency,decimal amount, string channel, Dictionary<string,string> metadata = null)
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
             var gateway = new AfricasTalkingGateway(username, apikey);
 
             try
             {
                 var checkout = gateway.Checkout(productName, phoneNumber, currency, amount, channel, metadata);
-                return "OK";
+                return checkout;
             }
             catch (AfricasTalkingGatewayException e)
             {
