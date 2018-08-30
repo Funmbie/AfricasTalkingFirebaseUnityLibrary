@@ -337,16 +337,16 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="AfricasTalkingUnityClass">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingUnityClass.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/AfricasTalkingUnityClass.dll</HintPath>
  </Reference>
  <Reference Include="AfricasTalkingCS">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/AfricasTalkingCS.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/Dependencies/AfricasTalkingCS.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/Dependencies/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Http.Formatting">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/System.Net.Http.Formatting.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/Dependencies/System.Net.Http.Formatting.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

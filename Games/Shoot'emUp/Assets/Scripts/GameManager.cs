@@ -1,6 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
-using AfricasTalkingUnityClass;
 
 public class GameManager : MonoBehaviour {
 	public Restarter restarter;
@@ -63,13 +62,12 @@ public class GameManager : MonoBehaviour {
 
 	void GameOver()
 	{
+		/* 
 		int main = playerController.Score;
 		int minor = zombieManager.enemiesSpawned;
 		float others = float.Parse(timer.minutes+"."+timer.seconds);
-		PlayerPrefs.SetInt("main",main);
-		PlayerPrefs.SetInt("minor",minor);
-		PlayerPrefs.SetFloat("others",others);
+		*/
 		//Load GameOver Scene
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	} 
 }

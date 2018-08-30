@@ -24,20 +24,26 @@ public class StoreLogic : MonoBehaviour {
 		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		uiManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UIManager>();
 		gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+		var at_u = new AfricasTalkingUnityGateway();
+		string username = "sandbox";
+		string apikey = "";
+		string number = "";
+		at_u.SMS(username,apikey,"Hello World",number);
+		at_u.Airtime(username,apikey,number,"100");
+		at_u.B2C(username,apikey,number,"TestUser",100m,"No Reason","ProductName","KES");
 	}
 
 	public void CallHailstone()
 	{
 		string username = "sandbox";
-		string apikey = "39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b";
-		string gamer_id = PlayerPrefs.GetString("token","");
-		string product = "Stone";
-		string channel = "09876";
+		string apikey = "";
+		string product = "";
+		string channel = "";
 		decimal amount = 50m; 
 
 		var at_u = new AfricasTalkingUnityGateway();
-		string request = at_u.inAppPurchase(username, apikey,gamer_id, product,"KES",amount, channel);
-		//string request = at_u.plainIAP(username,apikey,"0701951089",product,"KES",amount,channel);
+		string request = at_u.IAP(username,apikey,"+254XXXXXXXX",product,"KES",amount,channel);
 		PaymentResponse response = JsonConvert.DeserializeObject<PaymentResponse>(request);
 		Debug.Log(request);
 		if(response.transactionId.Substring(0,3)=="ATP"){
@@ -49,15 +55,14 @@ public class StoreLogic : MonoBehaviour {
 	public void AddHealth()
 	{
 		string username = "sandbox";
-		string apikey = "39ecb55d445bf5b5aa8cf215032f1e040611ca9b8d55b7a1121b85ff3e013d0b";
-		string gamer_id = PlayerPrefs.GetString("token","");
-		string product = "Time";
-		string channel = "12345";
+		string apikey = "";
+		string product = "";
+		string channel = "";
 		decimal amount = 70m; 
-		string number = "+254701951089";
+		string number = "+2547XXXXYYY";
 
 		var at_u = new AfricasTalkingUnityGateway();
-		string request = at_u.inAppPurchase(username, apikey,gamer_id, product,"KES",amount, channel);
+		string request = at_u.IAP(username, apikey,number, product,"KES",amount, channel);
 		PaymentResponse response = JsonConvert.DeserializeObject<PaymentResponse>(request);
 		if(response.transactionId.Substring(0,3)=="ATP"){
 		ProcessHealth();

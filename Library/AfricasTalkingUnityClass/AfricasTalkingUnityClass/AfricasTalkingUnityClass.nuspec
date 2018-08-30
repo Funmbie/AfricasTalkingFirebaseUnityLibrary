@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AfricasTalking.Unity3D</id>
+    <version>1.0.0</version>
+    <title>AfricasTalking Unity3D API</title>
+    <authors>Funmbi Oyesanya</authors>
+    <owners>AfricasTalking</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This is an SDK that helps to implement Africa's Talking APIs (SMS,Airtime,Mobile Checkout, B2C) in your Unity3D project. There are also functions that make use of the Firebase Database -  a feature we are currently exploring and will like your feedback as this is still in its early stages. Feel free to contact us if you have any queries at info@africastalking.com</description>
+    <releaseNotes>Edited</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>C# Unity Africa Payment Firebase</tags>
+    <dependencies>
+    <group targetFramework="uap">
+    <dependency id="AfricasTalking.NET" version="1.1.700"></dependency>
+    <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3"></dependency>
+    <dependency id="Newtonsoft.Json" version="1.1.0"></dependency>
+    <dependency id="System.Net.Http" version="4.3.3"></dependency>
+    </group>
+    </dependencies>
+  </metadata>
+  <!-- Insert below <metadata> element -->
+    <files>
+        <file src="bin\Release\AfricasTalkingUnityClass.dll" target="lib\netstandard1.4\AppLogger.dll" />
+        <!--<file src="bin\Release\AfricasTalkingUnityClass.xml" target="lib\netstandard1.4\AppLogger.xml" />-->
+    </files>
+</package>

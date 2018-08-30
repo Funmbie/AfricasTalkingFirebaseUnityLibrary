@@ -100,17 +100,10 @@
      <Compile Include="Assets\ImportedPackages\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
      <Compile Include="Assets\Scripts\bulletController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\DifficultySlider.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\HealthToUIManager.cs" />
-     <Compile Include="Assets\Scripts\Leaderboard.cs" />
-     <Compile Include="Assets\Scripts\LoginLogic.cs" />
-     <Compile Include="Assets\Scripts\MainMenuController.cs" />
-     <Compile Include="Assets\Scripts\MusicScript.cs" />
-     <Compile Include="Assets\Scripts\MusicToggle.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Restarter.cs" />
-     <Compile Include="Assets\Scripts\RetryLogicManager.cs" />
      <Compile Include="Assets\Scripts\scoreManager.cs" />
      <Compile Include="Assets\Scripts\SlowCamMove.cs" />
      <Compile Include="Assets\Scripts\StoreLogic.cs" />
@@ -361,16 +354,16 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="AfricasTalkingUnityClass">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalkingUnityClass.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/AfricasTalkingUnityClass.dll</HintPath>
  </Reference>
  <Reference Include="AfricasTalkingCS">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/AfricasTalkingCS.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/Dependencies/AfricasTalkingCS.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/Dependencies/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Http.Formatting">
- <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/Dependencies/System.Net.Http.Formatting.dll</HintPath>
+ <HintPath>C:/Users/Fumbi/Documents/ATUnity/AfricasTalkingFirebaseUnityLibrary/Games/Shoot'emUp/Assets/Library/AfricasTalking_Unity_SDK/Dependencies/System.Net.Http.Formatting.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Fumbi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

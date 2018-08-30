@@ -14,14 +14,19 @@ public class ZombieManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		int x = PlayerPrefs.GetInt("Difficulty",2);
+		Difficulty(1);
+		SpawnZombie();
+	}
+
+	void Difficulty(int x)
+	{
+		//Sets the time delay before another enemy is spawned
 		if(x==0)
 		delay = 3f;
 		else if(x==1)
 		delay = 1.5f;
 		else if(x==2)
 		delay = 0.75f;
-		SpawnZombie();
 	}
 
 	void Update()
